@@ -24,6 +24,8 @@ app.get("/", (req, res) => {
 // require routes
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
+require("./routes/hospital.routes")(app);
+require("./routes/admin.routes")(app);
 
 // PORT
 const PORT = process.env.PORT || 8080;
