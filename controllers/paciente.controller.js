@@ -1,6 +1,7 @@
 const config = require("../config/auth.config");
 const db = require("../models");
 const Paciente = db.paciente;
+const Doctor = db.doctor;
 
 exports.signup = (req, res) => {
     const paciente = new Paciente({
@@ -153,6 +154,32 @@ exports.deletePaciente = (req, res) => {
   });
 };
 
+exports.getDoctor = (req, res) => {
+  Paciente.findOne({
+    codigo: req.query.codigo,
+  })
+    .exec((err, paciente) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+
+      if (!paciente) {
+        return res.status(404).send({ message: "Paciente Not found! baka" });
+      }
+
+      Doctor.findById(
+        paciente.doctor
+      ).exec((err, doctor) => {
+        res.status(200).send({
+          id: doctor._id,
+          nombre: doctor.username,
+          email: doctor.email,
+          hospital: doctor.hospital
+        });
+      }); 
+    });
+};
 
 function makeid(length) {
     var result           = '';
