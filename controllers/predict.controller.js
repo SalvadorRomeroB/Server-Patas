@@ -12,7 +12,8 @@ exports.predict = (req, res) => {
         headers: {'content-type' : 'application/json'}, 
         url: "https://colab-model.herokuapp.com/prediction", 
         body: {data : foto},
-        json: true
+        json: {limit: '10mb', extended: true},
+        urlencoded: {limit: '10mb', extended: true}
     }, function(err, response, body){
         if (err) {
             res.status(500).send({ message: err });
