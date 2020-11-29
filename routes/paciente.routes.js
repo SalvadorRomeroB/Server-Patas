@@ -23,4 +23,6 @@ module.exports = (app) => {
 
   app.put("/api/paciente/esp", paciente.updatePaciente);
 
+  app.delete("/api/paciente/esp", paciente.deletePaciente);
+
 };
