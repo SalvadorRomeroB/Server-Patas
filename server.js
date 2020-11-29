@@ -28,6 +28,7 @@ require("./routes/paciente.routes")(app);
 require("./routes/hospital.routes")(app);
 require("./routes/admin.routes")(app);
 require("./routes/predict.routes")(app);
+require("./routes/historial.routes")(app);
 
 // PORT
 const PORT = process.env.PORT || 8080;

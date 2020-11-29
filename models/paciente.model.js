@@ -5,7 +5,7 @@ const Paciente = mongoose.model(
   new mongoose.Schema({
     nombre: String,
     telefono: String,
-    foto: {data: Buffer, contentType: String},
+    foto: String,
     codigo: String,
     doctor:{
         type: mongoose.Schema.Types.ObjectId,
