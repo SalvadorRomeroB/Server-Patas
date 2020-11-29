@@ -10,6 +10,7 @@ db.role = require("./role.model");
 db.paciente = require("./paciente.model");
 db.doctor = require("./doctor.model")
 db.hospital = require("./hospital.model")
+db.historial = require("./historial.model")
 
 db.ROLES = ["admin"];
 
