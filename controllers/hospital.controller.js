@@ -2,6 +2,17 @@ const db = require("../models");
 const Hospital = db.hospital;
 
 
+exports.getHospitalById =(req, res)=> {
+  Hospital.findById(req.params.id).exec((err,data)=>{
+    if(err){
+      return res.status(400).json({
+        error: "Id not found"
+      })
+    }
+    res.json(data)
+  })
+}
+
 exports.getHospitals = (req, res)=> {
   Hospital.find().exec((err, data)=> {
     if(err){

@@ -6,6 +6,29 @@ const Hospital = db.hospital
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+
+exports.getDoctors = (req, res)=> {
+  Doctor.find().select('').exec((err, data)=> {
+    if(err){
+      return res.status(400).json({
+        error: "No doctors found"
+      })
+    }
+    res.json(data)
+  })
+}
+
+exports.getDoctorById =(req, res)=> {
+  Doctor.findById(req.params.id).exec((err,data)=>{
+    if(err){
+      return res.status(400).json({
+        error: "Doctor not found"
+      })
+    }
+    res.json(data)
+  })
+}
+
 exports.signup = (req, res) => {
   const doctor = new Doctor({
     username: req.body.username,

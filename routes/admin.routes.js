@@ -18,8 +18,10 @@ module.exports = (app) => {
     auth.signup
   );
 
+  app.get("/api/doctors/get", [authJwt.verifyToken], auth.getDoctors)
+  app.get("/api/doctors/get/:id", [authJwt.verifyToken], auth.getDoctorById)
   app.put("/api/doctor/update/:id", authJwt.verifyToken, auth.updateDoctor)
   app.put("/api/doctor/update/password/:id", authJwt.verifyToken, auth.updatePassword)
-
+  
   app.post("/api/doctor/signin", auth.signin);
 };
