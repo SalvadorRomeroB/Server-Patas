@@ -22,9 +22,11 @@
 
 ---
 
-## Server Express
+## Express Server
 
-> LIGA: https://patas-app.herokuapp.com
+> Link: https://patas-app.herokuapp.com
+
+## Doctor
 
 ### Sign up Doctor
 
@@ -56,18 +58,73 @@
         "password": "1234",
     }
 
-### Hospitals CRUD
+### Update email or username of Doctor
 
-> GET: https://patas-app.herokuapp.com/api/test/hospital
+> POST: https://patas-app.herokuapp.com/api/doctor/update/:id
+
+> Headers:
+
+    {
+        x-access-token: doctor's token
+    }
 
 > Body:
+
+#### You can modify email and username
+
+#### You can place as parameters username and email, or only username or email.
 
     {
         "username": "Juan",
+        "email": "juan@hotmail.com",
+    }
+
+    or
+
+    {
+        "username": "Juan",
+    }
+
+    or
+
+    {
+        "email": "juan@hotmail.com",
+    }
+
+app.put("/api/doctor/update/password/:id", authJwt.verifyToken, auth.updatePassword)
+
+### Update password of Doctor
+
+> POST: https://patas-app.herokuapp.com/api/doctor/update/password/:id
+
+> Headers:
+
+    {
+        x-access-token: doctor's token
+    }
+
+> Body:
+
+    {
         "password": "1234",
+        "newPassword": "4321"
     }
 
-> POST: https://patas-app.herokuapp.com/api/test/hospital
+## Admin
+
+### Hospitals CRUD
+
+> Headers:
+
+#### All hospitals requests should have this header with an admin token
+
+    {
+        x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYzMxMjdjNmYxZWQ0MWRjNGFjNmRmYiIsImlhdCI6MTYwNjYxOTkzOSwiZXhwIjoxNjA2NzA2MzM5fQ.baWgAmQf0VPO0gMzu_2ipJwM6g3l1BOHN5X_ZW8Ejrc
+    }
+
+> GET: https://patas-app.herokuapp.com/api/hospital
+
+> POST: https://patas-app.herokuapp.com/api/hospital
 
 > Body:
 
@@ -75,7 +132,7 @@
         "name": "Hospital los Angeles"
     }
 
-> Delete: https://patas-app.herokuapp.com/api/test/hospital/:id
+> Delete: https://patas-app.herokuapp.com/api/hospital/:id
 
 > Body:
 
@@ -83,7 +140,7 @@
         "name": "Hospital los Angeles"
     }
 
-> PUT: https://patas-app.herokuapp.com/api/test/hospital/:id
+> PUT: https://patas-app.herokuapp.com/api/hospital/:id
 
 > Body:
 
@@ -100,6 +157,6 @@
 > Body:
 
     {
-        "username": "Juan",
+        "username": "Salvador",
         "password": "1234",
     }
