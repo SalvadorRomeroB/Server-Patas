@@ -90,3 +90,16 @@
     {
         "name": "Cima"
     }
+
+## Admin Routes
+
+### Sign in Admin
+
+> POST: https://patas-app.herokuapp.com/api/auth/signin
+
+> Body:
+
+    {
+        "username": "Juan",
+        "password": "1234",
+    }
