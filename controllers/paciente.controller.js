@@ -45,13 +45,23 @@ exports.signin = (req, res) => {
         if (!paciente) {
           return res.status(404).send({ message: "Paciente Not found! baka" });
         }
-  
-        res.status(200).send({
-          id: paciente._id,
-          nombre: paciente.nombre,
-          telefono: paciente.telefono,
-          foto: paciente.foto
-        });
+
+        Doctor.findById(
+          paciente.doctor
+        ).exec((err, doctor) => {
+          res.status(200).send({
+            id: paciente._id,
+            nombre: paciente.nombre,
+            telefono: paciente.telefono,
+            foto: paciente.foto,
+            doctor: {
+              id: doctor._id,
+              nombre: doctor.username,
+              email: doctor.email,
+              hospital: doctor.hospital
+            }
+          });
+        }); 
       });
 };
 
