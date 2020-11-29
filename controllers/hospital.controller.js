@@ -29,12 +29,12 @@ exports.addHospital = (req, res) => {
       name: req.body.name,
     });
   
-    hospital.save((err) => {
+    hospital.save((err, data) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
-      res.send({ message: "Hospital saved" });
+      res.send(data);
 
     });
   };
@@ -53,16 +53,19 @@ exports.addHospital = (req, res) => {
       }
     };
 
-    exports.updateHospital = async(req, res) => {
-        try {
-            await Hospital.findByIdAndUpdate(req.params.id, {name: req.body.name})
-            await Hospital.save()
-            res.send("Hospital updated successfully")
-          } catch (err) {
-            res.status(500).send(err)
-          }
+    exports.updateHospital = (req, res) => {
+          Hospital.findByIdAndUpdate(req.params.id, {name: req.body.name},{ new: true } ,(err, hospital) => {
+            if (err){
+              res.send(err)
+            }else{
+              res.send(hospital)
+            }
+
+        });
         };
     
+
+       
   
 
   

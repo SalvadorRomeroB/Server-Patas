@@ -101,7 +101,7 @@ exports.signin = (req, res) => {
 exports.updateDoctor = (req, res, next) => {
   Doctor.findByIdAndUpdate(req.params.id, {
       $set: req.body
-  }, (err, doctor) => {
+  },{ new: true }, (err, doctor) => {
       if (err) return next(err);
       res.status(200).send({
         id: doctor._id,
