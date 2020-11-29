@@ -25,4 +25,5 @@ module.exports = (app) => {
 
   app.delete("/api/paciente/esp", paciente.deletePaciente);
 
+  app.get("/api/paciente/doctor", paciente.getDoctor);
 };

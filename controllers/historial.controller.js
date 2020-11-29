@@ -6,7 +6,7 @@ const Historial = db.historial;
 exports.getHistorialDePaciente = (req, res) => {
     Historial.find({
       paciente: req.query.id,
-    })
+    }).sort({fecha: 'desc'})
       .exec((err, historiales) => {
         if (err) {
           res.status(500).send({ message: err });
@@ -20,7 +20,7 @@ exports.getHistorialDePaciente = (req, res) => {
 exports.getHistorialDePacienteCodigo = (req, res) => {
     Paciente.findOne({
         codigo: req.query.codigo,
-      })
+      }).sort({fecha: 'desc'})
         .exec((err, paciente) => {
           if (err) {
             res.status(500).send({ message: err });
@@ -39,7 +39,6 @@ exports.getHistorialDePacienteCodigo = (req, res) => {
                 res.status(500).send({ message: err });
                 return;
               }
-        
               res.status(200).send(historiales);
         });
     })    
