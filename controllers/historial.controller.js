@@ -22,7 +22,6 @@ exports.getHistorialDePacienteCodigo = (req, res) => {
         codigo: req.query.codigo,
       })
         .exec((err, paciente) => {
-            console.log(paciente);
           if (err) {
             res.status(500).send({ message: err });
             return;
@@ -43,5 +42,33 @@ exports.getHistorialDePacienteCodigo = (req, res) => {
         
               res.status(200).send(historiales);
         });
+    })    
+};
+
+exports.agregarComentario = (req, res) => {
+    Historial.findById(req.query.id)
+        .exec((err, historial) => {
+          if (err) {
+            res.status(500).send({ message: err });
+            return;
+          }
+
+          console.log(historial)
+          
+
+          if(!historial){
+            return res.status(404).send({ message: "Entrado Not found! baka" });
+          }
+
+          historial.comentario = req.body.comentario
+          
+          historial.save((err, historial) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+          
+            res.status(200).send(historial);
+          });
     })    
 };
