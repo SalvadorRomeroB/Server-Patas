@@ -124,7 +124,11 @@ exports.updatePaciente = (req, res) => {
               return;
             }
           
-            res.send({ message: "Paciente was updated successfully! uwu!" });
+            res.send({ id: paciente._id,
+              nombre: paciente.nombre,
+              telefono: paciente.telefono,
+              foto: paciente.foto,
+              codigo: paciente.codigo });
           });
     });
 };

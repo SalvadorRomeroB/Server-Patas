@@ -16,3 +16,32 @@ exports.getHistorialDePaciente = (req, res) => {
         res.status(200).send(historiales);
       });
 };
+
+exports.getHistorialDePacienteCodigo = (req, res) => {
+    Paciente.findOne({
+        codigo: req.query.codigo,
+      })
+        .exec((err, paciente) => {
+            console.log(paciente);
+          if (err) {
+            res.status(500).send({ message: err });
+            return;
+          }
+
+          if(!paciente){
+            return res.status(404).send({ message: "Paciente Not found! baka" });
+          }
+          
+          Historial.find({
+            paciente: paciente._id,
+          })
+            .exec((err, historiales) => {
+              if (err) {
+                res.status(500).send({ message: err });
+                return;
+              }
+        
+              res.status(200).send(historiales);
+        });
+    })    
+};
