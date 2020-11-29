@@ -9,7 +9,7 @@ const Paciente = mongoose.model(
     codigo: String,
     doctor:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Doctor",
     },
   })
 );

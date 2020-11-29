@@ -25,6 +25,8 @@ app.get("/", (req, res) => {
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/paciente.routes")(app);
+require("./routes/hospital.routes")(app);
+require("./routes/admin.routes")(app);
 require("./routes/predict.routes")(app);
 
 // PORT
