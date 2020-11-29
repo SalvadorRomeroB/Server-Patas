@@ -153,13 +153,9 @@ exports.updatePassword = (req, res, next) => {
 exports.deleteDoctor = async(req, res) => {
   try {
       await Doctor.findByIdAndDelete(req.params.id)
-  
-      if (!hospital){
-          res.status(404).send("No doctor found")
-      }else{
-          res.status(200).send({message: "Doctordeleted Successfully"})
-      } 
+      res.status(200).send({message: "Doctordeleted Successfully"})
+      
     } catch (err) {
       res.status(500).send(err)
     }
-  };
+};
