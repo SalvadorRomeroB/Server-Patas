@@ -2,6 +2,7 @@ const config = require("../config/auth.config");
 const db = require("../models");
 const Paciente = db.paciente;
 const Historial = db.historial;
+const HistorialBasura = db.historialBasura
 
 
 var request = require('request'); 
@@ -65,6 +66,13 @@ function postImage(foto, pacienteId, res) {
                 resultado: body
             });
             historial.save();
+        }else {
+            const historialBasura = new HistorialBasura({
+                foto: foto,
+                fecha: today,
+                resultado: body
+            });
+            historialBasura.save();
         }
         
         res.send({categoria: body , fecha: today});
