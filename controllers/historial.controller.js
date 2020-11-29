@@ -51,10 +51,7 @@ exports.agregarComentario = (req, res) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
-          }
-
-          console.log(historial)
-          
+          }          
 
           if(!historial){
             return res.status(404).send({ message: "Entrado Not found! baka" });
