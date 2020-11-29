@@ -74,3 +74,51 @@ exports.signin = (req, res) => {
       });
     });
 };
+
+exports.updateDoctor = (req, res, next) => {
+  Doctor.findByIdAndUpdate(req.params.id, {
+      $set: req.body
+  }, (err, doctor) => {
+      if (err) return next(err);
+      res.send('Info has been updated.');
+  });
+};
+
+exports.updatePassword = (req, res, next) => {
+
+  const newPassword = bcrypt.hashSync(req.body.newPassword, 8)
+
+  Doctor.findById(req.params.id)
+    .exec((err, doctor) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+
+      if (!doctor) {
+        return res.status(404).send({ message: "Doctor Not found! baka" });
+      }
+
+      var passwordIsValid = bcrypt.compareSync(
+        req.body.password,
+        doctor.password
+      );
+
+      if (!passwordIsValid) {
+        return res.status(401).send({
+          accessToken: null,
+          message: "Invalid Password! baka",
+        });
+      }else{
+        Doctor.findByIdAndUpdate(req.params.id, {
+          password: newPassword
+      }, (err, doctor) => {
+          if (err) return next(err);
+          res.send('Password updated successfully!');
+      });
+      }    
+    });
+ 
+};
+
+

@@ -1,6 +1,5 @@
-const { verifySignUp } = require("../middleware");
+const { verifySignUp,authJwt } = require("../middleware");
 const auth = require("../controllers/doctor.controller");
-const { authJwt } = require("../middleware");
 
 module.exports = (app) => {
   app.use((req, res, next) => {
@@ -14,11 +13,13 @@ module.exports = (app) => {
   app.post(
     "/api/admin/signup",
     [
-    authJwt.verifyToken, authJwt.isAdmin
-
+    verifySignUp.checkDuplicateUsernameOrEmailDoc, authJwt.verifyToken, authJwt.isAdmin
     ],
     auth.signup
   );
+
+  app.put("/api/doctor/update/:id", authJwt.verifyToken, auth.updateDoctor)
+  app.put("/api/doctor/update/password/:id", authJwt.verifyToken, auth.updatePassword)
 
   app.post("/api/doctor/signin", auth.signin);
 };
