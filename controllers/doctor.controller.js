@@ -80,7 +80,12 @@ exports.updateDoctor = (req, res, next) => {
       $set: req.body
   }, (err, doctor) => {
       if (err) return next(err);
-      res.send('Info has been updated.');
+      res.status(200).send({
+        id: doctor._id,
+        username: doctor.username,
+        email: doctor.email,
+        hospital: doctor.hospital,
+      });
   });
 };
 
