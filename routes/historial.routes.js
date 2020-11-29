@@ -14,4 +14,6 @@ module.exports = (app) => {
   app.get("/api/historial", historial.getHistorialDePaciente);
 
   app.get("/api/historial/codigo", historial.getHistorialDePacienteCodigo);
+
+  app.put("/api/historial/comentario", historial.agregarComentario);
 };
