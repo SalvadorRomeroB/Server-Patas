@@ -25,7 +25,8 @@ exports.signup = (req, res) => {
         id: paciente._id,
         nombre: paciente.nombre,
         telefono: paciente.telefono,
-        foto: paciente.foto
+        foto: paciente.foto,
+        codigo: paciente.codigo
       });
     });
 };
@@ -136,6 +137,20 @@ exports.updatePaciente = (req, res) => {
               codigo: paciente.codigo });
           });
     });
+};
+
+exports.deletePaciente = (req, res) => {
+  Paciente.findByIdAndDelete(
+      req.query.id,
+    )
+      .exec((err, paciente) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+
+        return res.status(200).send({ message: "Paciente eleminado! baka" });
+  });
 };
 
 
