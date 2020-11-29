@@ -21,7 +21,12 @@ exports.signup = (req, res) => {
         return;
       }
     
-      res.send({ message: "Paciente was registered successfully! uwu!" });
+      res.status(200).send({
+        id: paciente._id,
+        nombre: paciente.nombre,
+        telefono: paciente.telefono,
+        foto: paciente.foto
+      });
     });
 };
 
@@ -124,7 +129,7 @@ exports.updatePaciente = (req, res) => {
               return;
             }
           
-            res.send({ id: paciente._id,
+            res.status(200).send({ id: paciente._id,
               nombre: paciente.nombre,
               telefono: paciente.telefono,
               foto: paciente.foto,
